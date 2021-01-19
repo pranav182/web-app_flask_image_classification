@@ -3,6 +3,7 @@ This project was a part of **Machine Learning Specialization with TF2** by [**CL
 
 ## Understanding the Directory Structure
 Let us understand what are all the directories we will be using for our web app:
+
 ![Directory_structure](https://cxl-web-prod-uploads.s3.amazonaws.com/public/pagedown-uploads/064e9d401114e00a253002c60ac4f69c07a7918b.png)
 
 In this image, orange-colored text denotes the names of the directories and black-colored text denotes the file names.
