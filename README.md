@@ -59,19 +59,19 @@ We shall first create a directory Image-Classification-App, where we create the 
 
 ### How to create and use a Virtual Environment?
 
-- Creating a Virtual Environment:
+- **Creating a Virtual Environment:**
   - We create a virtual environment with the name we mention using the following command: virtualenv <<your virtual environment name>>
-Example: `virtualenv my_first_venv` creates a virtual environment named my_first_venv
+Example: `virtualenv my_first_venv` creates a virtual environment named **my_first_venv**
 
-- Activating a Virtual Environment:
+- **Activating a Virtual Environment:**
   - After creating the virtual environment, we switch to that environment to create our project and install the dependencies inside that environment.
-We switch to a virtual environment by using: source (your virtual environment name)/bin/activate
+We switch to a virtual environment by using: source <<your virtual environment name>>/bin/activate
 Example: `source my_first_venv/bin/activate` command switches to the virtual environment named my_first_venv
 
-- Deactivating a Virtual Environment:
-  - To exit the environment, we just need to use the command: deactivate
+- **Deactivating a Virtual Environment:**
+  - To exit the environment, we just need to use the command: **deactivate**
 
-### The following commands should be executed in the console.
+*The following commands should be executed in the console.*
 
 ```
 cd ~
@@ -86,11 +86,11 @@ Let us now install the necessary packages for our web app.
 
 We would use **pip** to install the packages. **pip** is a package-management system used to install and manage software packages.
 
-- Install the **Flask** package of version **1.1.2** as follows. Use the following command in the console.
+- Install the **Flask** package of version **1.1.2** as follows. Use the following command in the **console.**
 
 `pip install Flask==1.1.2`
 
-Install the **tensorflow** package of version **1.14.0** as follows.
+- Install the **tensorflow** package of version **1.14.0** as follows.
 
 ```
   python -m pip install --upgrade setuptools
@@ -98,6 +98,6 @@ Install the **tensorflow** package of version **1.14.0** as follows.
   pip install tensorflow==1.14.0
 ```
 
-Install the **pillow** package of version **6.2.2** as follows, for working with images(like loading the images which we would see later).
+- Install the **pillow** package of version **6.2.2** as follows, for working with images(like loading the images which we would see later).
 
 `pip install pillow==6.2.2`
