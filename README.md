@@ -1,7 +1,9 @@
 # Creating a web-app for Image Classificatiopn using Flask.
+
 This project was a part of **Machine Learning Specialization with TF2** by [**CLOUDXLAB**](http://cloudxlab.com/). This project mainly aims to show how to develop a web app using Flask for Image Classification with Pre-trained Keras model. We already know how to use a pre-trained model for Image classification.
 
 ## Understanding the Directory Structure
+
 Let us understand what are all the directories we will be using for our web app:
 
 ![Directory_structure](https://cxl-web-prod-uploads.s3.amazonaws.com/public/pagedown-uploads/064e9d401114e00a253002c60ac4f69c07a7918b.png)
@@ -29,12 +31,14 @@ The **Image-Classification-App** is the main flask directory, in which we have:
   - **uploads** : This directory is used to store the image uploaded to our app. This stored image will be used to display it along with the predictions.
 
 ## Creating the Project Directory
+
 We shall first create a directory Image-Classification-App, where we create the virtual environment and all the other necessary files and directories needed for our app.
 
 - Create a new directory named **Image-Classification-App** using the **mkdir** command.
 - Change to the directory **Image-Classification-App** using **cd** command.
 
 ## Creating a Virtual Environment
+
 ### What is a Virtual Environment?
 
 - As the name suggests, it is an environment virtually created to isolate the projects.
@@ -55,19 +59,42 @@ We shall first create a directory Image-Classification-App, where we create the 
 
 ### How to create and use a Virtual Environment?
 
-- **Creating a Virtual Environment:**
+1. Creating a Virtual Environment:
+We create a virtual environment with the name we mention using the following command: virtualenv <<your virtual environment name>>
+Example: `virtualenv my_first_venv` creates a virtual environment named my_first_venv
 
-  - We create a virtual environment with the name we mention using the following command: **virtualenv (your virtual environment name) **
-Ex: **virtualenv my_first_venv** creates a virtual environment named **my_first_venv.**
+2. Activating a Virtual Environment:
+After creating the virtual environment, we switch to that environment to create our project and install the dependencies inside that environment.
+We switch to a virtual environment by using: source (your virtual environment name)/bin/activate
+Example: `source my_first_venv/bin/activate` command switches to the virtual environment named my_first_venv
 
-- **Activating a Virtual Environment:**
+3. Deactivating a Virtual Environment:
+To exit the environment, we just need to use the command: deactivate
 
-  - After creating the virtual environment, we switch to that environment to create our project and install the dependencies inside that environment.
+### The following commands should be executed in the console.
 
-  - We switch to a virtual environment by using: **source (your virtual environment name)/bin/activate**
+> cd ~
+> cd Image-Classification-App
+> virtualenv Img-Class-Env
+> source Img-Class-Env/bin/activate
 
-Ex: **source my_first_venv/bin/activate** command switches to the virtual environment named **my_first_venv.**
+## Installing the Necessary Packages
+Let us now install the necessary packages for our web app.
 
-- **Deactivating a Virtual Environment:**
+We would use **pip** to install the packages. **pip** is a package-management system used to install and manage software packages.
 
-  - To exit the environment, we just need to use the command: **deactivate**
+- Install the **Flask** package of version **1.1.2** as follows. Use the following command in the console.
+
+`pip install Flask==1.1.2`
+
+Install the **tensorflow** package of version **1.14.0** as follows.
+
+```
+  python -m pip install --upgrade setuptools
+  pip install --no-cache-dir  --force-reinstall -Iv grpcio==1.11.0
+  pip install tensorflow==1.14.0
+```
+
+Install the **pillow** package of version **6.2.2** as follows, for working with images(like loading the images which we would see later).
+
+`pip install pillow==6.2.2`
