@@ -60,13 +60,13 @@ We shall first create a directory Image-Classification-App, where we create the 
 ### How to create and use a Virtual Environment?
 
 - **Creating a Virtual Environment:**
-  - We create a virtual environment with the name we mention using the following command: virtualenv <<your virtual environment name>>
+  - We create a virtual environment with the name we mention using the following command: **virtualenv (your virtual environment name)**
 Example: `virtualenv my_first_venv` creates a virtual environment named **my_first_venv**
 
 - **Activating a Virtual Environment:**
   - After creating the virtual environment, we switch to that environment to create our project and install the dependencies inside that environment.
-We switch to a virtual environment by using: source <<your virtual environment name>>/bin/activate
-Example: `source my_first_venv/bin/activate` command switches to the virtual environment named my_first_venv
+We switch to a virtual environment by using: **source (your virtual environment name)/bin/activate**
+Example: `source my_first_venv/bin/activate` command switches to the virtual environment named **my_first_venv**
 
 - **Deactivating a Virtual Environment:**
   - To exit the environment, we just need to use the command: **deactivate**
@@ -101,3 +101,51 @@ We would use **pip** to install the packages. **pip** is a package-management sy
 - Install the **pillow** package of version **6.2.2** as follows, for working with images(like loading the images which we would see later).
 
 `pip install pillow==6.2.2`
+
+## Creating the Helper Function File
+
+- We shall now create a file named **app_helper.py**
+
+- In this file, we shall create a function named **get_classes** inside which we:
+
+1. import the pre-trained model
+
+2. preprocess the input image as per requirements of the pre-trained model
+
+3. feed this preprocessed image as the input of the model and get the top 3 predictions as classified by the model.
+
+- This **app_helper.py** file should be created inside the **Image-Classification-App** directory. So make sure you are in the directory **Image-Classification-App**
+
+- Now, create a file named app_helper.py using the vi command.
+
+- Press i key on your keyboard, to switch to insert mode in the file.
+
+- Write the below code in the file.
+
+```
+# Import the model and other libraries
+from tensorflow.keras.applications.resnet50 import ResNet50 as myModel
+from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
+
+from tensorflow.keras.preprocessing import image
+import numpy as np
+
+def get_classes(file_path):
+    # Create an instance of 'myModel' imported above
+    model = myModel(weights="imagenet")
+
+    # Load image and preprocess it
+    img = image.load_img(file_path, target_size=(224, 224))
+    x = image.img_to_array(img)
+    x= np.array([x])
+    x = preprocess_input(x)
+
+    # This is the inference time. Given an instance, it produces the predictions.
+    preds = model.predict(x)
+    predictions = decode_predictions(preds, top=3)[0]
+    return predictions
+```
+
+- Now, click on esc button on your keyboard.
+
+- Then, type :wq! and then hit on enter key on your keyboard. This returns you to your console.
