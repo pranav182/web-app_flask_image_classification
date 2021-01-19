@@ -1,4 +1,4 @@
-# Creating a web-app for Image Classificatiopn using Flask.
+# Creating a web-app for Image Classification using Flask.
 
 This project was a part of **Machine Learning Specialization with TF2** by [**CLOUDXLAB**](http://cloudxlab.com/). This project mainly aims to show how to develop a web app using Flask for Image Classification with Pre-trained Keras model. We already know how to use a pre-trained model for Image classification.
 
@@ -484,7 +484,7 @@ Here, we are rendering the upload.html file, and passing the variable preds as p
 - Similarly, the predictions will be shown using predictions.
 - Here the variable preds is passed as predictions, f.filename is passed as display_image so as to make the job easier for the front-end developer(in the real-time software development scenario), who generally doesn't need to know the coding knowledge and Python technicalities.
 
-secure_filename method from flask is used to secure a filename before storing it directly on the filesystem. We need to do this because we can't always trust the user input and we should be secure about the files we are receiving from the user. More about this is here.
+secure_filename method from flask is used to secure a filename before storing it directly on the filesystem. We need to do this because we can't always trust the user input and we should be secure about the files we are receiving from the user.
 
 os.path.dirname(__file__) is the file path of app.py.
 
