@@ -354,16 +354,218 @@ This is what is written inside the {% block content %} and {% endblock %}, as fo
 {% endblock %}
 ```
 
+## Creating the upload.html file
+
+Now inside the **templates** directory, we will proceed to create the **upload.html** file. This page displays the uploaded image along with the predicted classes and the probabilities.
+
+This file **upload.html** should be created inside **Image-Classification-App/templates.** So make sure you are in the **Image-Classification-App/templates**
 
 
+`vi upload.html`
 
+```
+{% extends "layout.html" %}
 
+{% block content %}
+<div class="centered">
+    <div class="row">
+        <div class="col-md-5"> 
+            <div class="image-container">
+                <figure>
+                  <img src="/static/uploads/{{display_image}}" style="width:400px;height:250px;">
+                </figure>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <p style="color:red"> {{predictions}}</p>
+    </div>
 
+    </br>
 
+    <div class="row">
+        <div class="col-md-5">
+            <div class="upload-form">
+                <p><b>Upload another?</b></p>
+                <form action = "/uploader" method = "POST" 
+                          enctype = "multipart/form-data">
+                    <input type = "file" name = "file" />
+                    <input type = "submit"/>
+                </form>
+            </div>      
+        </div>
+    </div>
+</div>
+{% endblock %}
+```
+Observe the following lines from the above code:
 
+We again write
+`{% extends "layout.html" %}`
+to import/link the **layout.html** file that we have previously created.
 
+```
+{% block content %}
 
+      << some HTML code >>
 
+{% endblock %}
+```
+This is the place where we display the content which is exclusive to this HTML file( or more simply, this page).
 
+The content that is exclusive to this page is (1) to display the input image we uploaded along with the top 3 predictions given by the classifier for this input image, and (2) to show the form to upload and submit another input image.
 
+These 2 functioalities are coded within the 2 snippets of code as shown below:
 
+The following code *displays the input image we uploaded along with the top 3 predictions given by the classifier for this input image:*
+
+```
+          <div class="row">
+                <div class="col-md-5"> 
+                    <div class="image-container">
+                        <figure>
+                          <img src="/static/uploads/{{display_image}}" 
+                              style="width:400px;height:250px;">
+                        </figure>
+                    </div>
+                </div>
+           </div>
+
+           <div class="row">
+                   <p style="color:red"> {{predictions}}</p>
+           </div>
+```
+
+In the above, observe `<img src="/static/uploads/{{display_image}}" style="width:400px;height:250px;">` 
+This line displays the image which will be uploaded. The uploaded image is stored in **/static/uploads/upload.html**
+
+Also in the above, observe `<p style="color:red"> {{predictions}}</p>` 
+This line displays the predictions given by the model. The text will be displayed in red color.
+
+The following code *displays the form to upload and submit an image again:*
+
+```
+   <div class="row">
+      <div class="col-md-5">
+        <div class="upload-form">
+            <p><b>Upload another?</b></p>
+            <form action = "/uploader" method = "POST" 
+                      enctype = "multipart/form-data">
+                <input type = "file" name = "file" />
+                <input type = "submit"/>
+            </form>
+        </div>     
+      </div>
+   </div>
+```
+
+## Creating the app.py File
+
+Now we shall create the app.py file, where we define all the routes and functions to perform for each action. This file is the root of our Flask application which we will run in the command line prompt.
+
+**Note:**
+
+Flask from flask is an instance of the flask framework for web app development. So we need to initialize a flask app by using Flask(__name__). By writing app = Flask(__name__), we name the flask instance as app.
+
+@app.route is a python decorator that specifies to the application which function should be executed based on the URL. For example, here in our web app, the default URL route / calls(invokes) the function index. Also, as soon as the user submits the input image file, the /uploader route will be activated(this is defined in the index.html file, you could have a look at it). This URL route calls(invokes) the function upload_file, since we have written @app.route('/uploader', methods = ['POST']) before defining the upload_file function.
+
+The request method is used to deal with the requests made by the client through the web app. The request method from the flask app is a global request variable, which has the request data like the data entered/submitted in the form, the current request type(like GET, POST, etc), and others.
+
+In our web app, we use request to get the image file submitted by the user. We access that file using request.files['file']. This request is of method POST.
+
+To render a template from the function in app.py, we can use the render_template() method of flask. We just need to provide the name of the template and the variables we want to pass to the template as keyword arguments.
+
+For example,
+
+`render_template("upload.html", predictions=preds, display_image=f.filename)`
+Here, we are rendering the upload.html file, and passing the variable preds as predictions, f.filename as display_image.
+
+- These variables will be used in the upload.html file to display the image file with filename f.filename using {{display_image}}.
+- Similarly, the predictions will be shown using predictions.
+- Here the variable preds is passed as predictions, f.filename is passed as display_image so as to make the job easier for the front-end developer(in the real-time software development scenario), who generally doesn't need to know the coding knowledge and Python technicalities.
+
+secure_filename method from flask is used to secure a filename before storing it directly on the filesystem. We need to do this because we can't always trust the user input and we should be secure about the files we are receiving from the user. More about this is here.
+
+os.path.dirname(__file__) is the file path of app.py.
+
+os.path.join(basepath, 'static','uploads', secure_filename(f.filename)) joins the paths of files/directories which are passed arguments to the function os.path.join. Here, we are saving the file uploaded by the user into the static/uploads directory which we have created earlier.
+
+app.run(host="0.0.0.0",debug=True,port="4100") method is used to run the flask app as soon as the file is executed, based on the URL given in the browser. The app runs on the given host at the given port number, with debug mode, meaning any errors/warnings/messages will be shown on the command prompt.
+
+This file app.py should be created inside the Image-Classification-App directory. So make sure you are in the directory Image-Classification-App.
+
+`vi app.py`
+
+```
+from flask import Flask, request, render_template
+from werkzeug.utils import secure_filename
+import os
+from app_helper import *
+app = Flask(__name__)
+
+# Define the function index to perform, upon reaching to the default link /. Remember we have already # created the HTML file for the home page for our app? It is the index.html.
+# This page will be opened as the default page, by writing as follows:
+
+@app.route("/")
+def index():
+  return render_template("index.html")
+  
+# Define upload_file function which will be performed after the user submits the input image file.
+
+@app.route('/uploader', methods = ['POST'])
+def upload_file():
+    predictions=""
+    if request.method == 'POST':
+        f = request.files['file']
+
+        # Save the file to ./uploads
+        basepath = os.path.dirname(__file__)
+        file_path = os.path.join(basepath, 'static','uploads', secure_filename(f.filename))
+        f.save(file_path)
+
+        predictions = get_classes(file_path)
+        pred_strings = []
+        for _,pred_class,pred_prob in predictions:
+            pred_strings.append(str(pred_class).strip()+" : "+str(round(pred_prob,5)).strip())
+        preds = ", ".join(pred_strings)
+        print("preds:::",preds)
+    return render_template("upload.html", predictions=preds, display_image=f.filename)
+```
+
+Here,
+
+We are saving the user-uploaded file using f.save(file_path).
+
+We call the get_classes function defined in the file app_helper.py(which we have created earlier and imported above), and pass the input image file given by the user through the web interface. We will be returned the predictions predictions are outputted by the model defined in the get_classes function. predictions is a tuple containing the predicted classes and the probabilities in the decreasing order.
+
+We would further process the predictions to form preds, and pass this variable as predictions to the upload.html file while rendering that template.
+
+Write the following code to initiate the app running when the file is executed.
+```
+if __name__ == "__main__":
+    app.run(host="0.0.0.0",debug=True,port="4100")
+```
+
+CloudxLab has ports open from 4040 to 4140. So could change the port number in case of any issues while executing the app.
+
+## Opening the Web App
+
+It's time to run the web app we created. Make sure you are in the directory Image-Classification-App since the app.py file present in this directory.
+
+Before running the web app, let us have a look at the 1000 classes on which our pre-trained model was trained.
+
+`cat /cxldata/dlcourse/1000_imagenet_classes_file.txt`
+Remember, when we open the web app(the steps which we would perform next), we need to upload the images of classes that are a part of these 1000 classes, as the model is trained to classify the images of these classes only.
+
+Since there are multiple hosts on which users work. It is important to find out what is the public name of the host you going to start the server. Find out the local IP address of the host using the command ifconfig eth0|grep "inet ". Note down the IP address from it.
+
+Now, open [https://cloudxlab.com/my-lab#ip-mappings] in a new tab and find the public hostname for the IP address.
+
+Now go to the console, and execute the following command:
+
+`python app.py`
+*It might take some seconds for the server to start.*
+
+Now go to your favorite browser (preferably Google Chrome), and go to http://host:port. In my case it is f.cloudxlab.com and the port is 4100. So, for me the link is: http://f.cloudxlab.com:4100/. For you it could be http://e.cloudxlab.com:4100/
+
+To stop the server from running, we could use the **CTRL+C** keys on the keyboard.
