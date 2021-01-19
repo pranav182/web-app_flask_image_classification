@@ -59,26 +59,29 @@ We shall first create a directory Image-Classification-App, where we create the 
 
 ### How to create and use a Virtual Environment?
 
-1. Creating a Virtual Environment:
-We create a virtual environment with the name we mention using the following command: virtualenv <<your virtual environment name>>
+- Creating a Virtual Environment:
+  - We create a virtual environment with the name we mention using the following command: virtualenv <<your virtual environment name>>
 Example: `virtualenv my_first_venv` creates a virtual environment named my_first_venv
 
-2. Activating a Virtual Environment:
-After creating the virtual environment, we switch to that environment to create our project and install the dependencies inside that environment.
+- Activating a Virtual Environment:
+  - After creating the virtual environment, we switch to that environment to create our project and install the dependencies inside that environment.
 We switch to a virtual environment by using: source (your virtual environment name)/bin/activate
 Example: `source my_first_venv/bin/activate` command switches to the virtual environment named my_first_venv
 
-3. Deactivating a Virtual Environment:
-To exit the environment, we just need to use the command: deactivate
+- Deactivating a Virtual Environment:
+  - To exit the environment, we just need to use the command: deactivate
 
 ### The following commands should be executed in the console.
 
-> cd ~
-> cd Image-Classification-App
-> virtualenv Img-Class-Env
-> source Img-Class-Env/bin/activate
+```
+cd ~
+cd Image-Classification-App
+virtualenv Img-Class-Env
+source Img-Class-Env/bin/activate
+```
 
 ## Installing the Necessary Packages
+
 Let us now install the necessary packages for our web app.
 
 We would use **pip** to install the packages. **pip** is a package-management system used to install and manage software packages.
