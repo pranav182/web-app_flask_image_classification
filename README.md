@@ -149,3 +149,94 @@ def get_classes(file_path):
 - Now, click on esc button on your keyboard.
 
 - Then, type :wq! and then hit on enter key on your keyboard. This returns you to your console.
+
+## Creating the Static Directory
+
+As discussed previously, we create the **static** directory to contain static files such as JS, CSS, and images by Flask. We first create the **static** directory now and then create the **css** and **uploads** directory in the subsequent slides.
+
+This static directory should be created inside the Image-Classification-App directory. So make sure you are in the directory Image-Classification-App.
+
+```
+mkdir static
+cd static
+```
+## Creating the CSS Directory
+
+It's time to create the **css** directory inside the **static** directory as discussed earlier.
+
+We create and switch to the **css** directory, and then make a file named **main.css** inside the **css** directory. This **main.css** contains the formatting of the HTML files that we will be creating. The formatting might include the colors, padding, margins, alignment, and many more.
+
+This **css** directory should be created inside Image-Classification-App/static. So make sure you are in the Image-Classification-App/static.
+
+```
+mkdir css
+cd css
+vi main.css
+```
+
+The following css code is inserted into the file
+```
+body {
+  background-color: #f4f4f4;
+  font-family: 'Open Sans', sans-serif;
+}
+
+header {
+  background-color: #fcba03;
+  padding: 25px 0;
+}
+
+.title {
+  float: left;
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin: 0px 20px;
+}
+
+.upload-image-thumb {
+  max-width: 800px;
+  margin: 100px;
+}
+.image-container {
+  margin: 0px auto;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
