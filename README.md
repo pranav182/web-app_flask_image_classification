@@ -62,12 +62,12 @@ Ex: **virtualenv my_first_venv** creates a virtual environment named **my_first_
 
 - **Activating a Virtual Environment:**
 
-- After creating the virtual environment, we switch to that environment to create our project and install the dependencies inside that environment.
+  - After creating the virtual environment, we switch to that environment to create our project and install the dependencies inside that environment.
 
-- We switch to a virtual environment by using: **source (your virtual environment name)/bin/activate**
+  - We switch to a virtual environment by using: **source (your virtual environment name)/bin/activate**
 
 Ex: **source my_first_venv/bin/activate** command switches to the virtual environment named **my_first_venv.**
 
 - **Deactivating a Virtual Environment:**
 
-To exit the environment, we just need to use the command: **deactivate**
+  - To exit the environment, we just need to use the command: **deactivate**
