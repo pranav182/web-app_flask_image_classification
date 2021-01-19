@@ -211,15 +211,92 @@ header {
 }
 ```
 
+## Creating the Uploads Directory
 
+As discussed previously, we create the **uploads** directory to store the image uploaded to our app. This stored image will be used to display it along with the predictions.
 
+This **uploads** directory should be created inside the **static** directory of the **Image-Classification-App** directory. So make sure you are in the directory **Image-Classification-App/static.**
 
+```
+mkdir uploads
+cd uploads
+```
 
+## Creating the Templates Directory
 
+As discussed earlier, we will now create the **templates** directory. This directory is recognized to contain the HTML files by Flask. In the subsequent slides, we will further see how to create **layout.html, index.html,** and **upload.html** files inside this templates directory.
 
+This **templates** directory should be created inside the **Image-Classification-App** directory. So make sure you are in the directory **Image-Classification-App**
 
+```
+mkdir templates
+cd templates
+```
 
+## Creating the layout.html file
+Now inside the templates directory, we will proceed to create the layout.html file.
 
+This file defines the layout of the pages, like the Navigation bar, which should be the same for the pages. Thus all such info will be coded in this file.
+
+This file will be imported into other HTML files, as the layout is the same for all the web pages we will be using.
+
+**Note:**
+
+We could embed Python-Flask code snippets into an HTML file using {{ }}. For example, consider the code-snippet that we will be using in layout.html file.
+
+<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+
+Here, url_for() generates a URL to the given endpoint. So here, we are linking the CSS file Image-Classification-App/static/css/main.css in the current file layout.html. In HTML, we use the href attribute to specify the URL of the page we want to link. So here, we are linking the file path Image-Classification-App/static/css/main.css to the layout.html file by writing <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"> in the layout.html file.
+
+This file layout.html should be created inside Image-Classification-App/templates. So make sure you are in the Image-Classification-App/templates.
+
+`vi layout.html`
+
+```
+<!doctype HTML>
+    <html lang="en">
+      <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Required CDNs for Fonts and Bootstrap -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"                               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <!-- Required Linking to the CSS file main.css we created -->
+        <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+     </head>
+
+     <body>
+
+        <header>
+            <h1 class="title"><b>Image Classification App</b></h1>
+        </header>
+
+        <div class="container-fluid">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <!-- Other required CDNs -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+      </body>
+</html>
+```
+
+Observe the following lines from the above code:
+
+- <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">. Here we are linking the main.css file(which we created in the Image-Classification-App/static/css/ directory) to the layout.html file so that the stylings will be applied to all the HTML files, since the layout.html file will be linked to all the other HTML files too.
+
+```
+{% block content %}
+{% endblock %}
+```
+This is the place where we display the content from the other HTML files, wherever this layout.html is imported.
 
 
 
