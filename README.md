@@ -244,9 +244,9 @@ This file will be imported into other HTML files, as the layout is the same for 
 
 We could embed Python-Flask code snippets into an HTML file using {{ }}. For example, consider the code-snippet that we will be using in layout.html file.
 
-<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+`<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">`
 
-Here, url_for() generates a URL to the given endpoint. So here, we are linking the CSS file Image-Classification-App/static/css/main.css in the current file layout.html. In HTML, we use the href attribute to specify the URL of the page we want to link. So here, we are linking the file path Image-Classification-App/static/css/main.css to the layout.html file by writing <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"> in the layout.html file.
+Here, url_for() generates a URL to the given endpoint. So here, we are linking the CSS file Image-Classification-App/static/css/main.css in the current file layout.html. In HTML, we use the href attribute to specify the URL of the page we want to link. So here, we are linking the file path Image-Classification-App/static/css/main.css to the layout.html file by writing `<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">` in the layout.html file.
 
 This file layout.html should be created inside Image-Classification-App/templates. So make sure you are in the Image-Classification-App/templates.
 
@@ -298,11 +298,61 @@ Observe the following lines from the above code:
 ```
 This is the place where we display the content from the other HTML files, wherever this layout.html is imported.
 
+## Creating the index.html File
 
+Now inside the **templates** directory, we will proceed to create the **index.html** file. This is the home page, where the user is asked to upload the image whose class should be predicted using our pre-trained model.
 
+This file **index.html** should be created inside **Image-Classification-App/templates.** So make sure you are in the **Image-Classification-App/templates**
 
+`vi index.html`
 
+```
+{% extends "layout.html" %}
 
+{% block content %}
+<center>
+    <div class="centered">
+        <p><b>Upload an image to predict its class</b></p>
+        <div class="upload-form">
+          <form action = "/uploader" method = "POST" enctype = "multipart/form-data">
+            <input type = "file" name = "file" />
+            <input type = "submit"/>
+          </form>
+        </div>
+ </div>
+</center> 
+{% endblock %}
+```
+
+Observe the following lines from the above code:
+
+- `{% extends "layout.html" %}`
+This is the way we import/link the **layout.html** file that we have previously created. By doing this, we are applying the layout (as defined in the **layout.html** file) to our **index.html**
+
+```
+{% block content %}
+
+      << some HTML code >>
+
+{% endblock %}
+```
+This is the place where we display the content which is exclusive to this HTML file( or more simply, this page). The content that is exclusive to this page is the form for uploading an image and submit it.
+This is what is written inside the {% block content %} and {% endblock %}, as follows:
+```
+{% block content %}
+<center>
+    <div class="centered">
+        <p><b>Upload an image to predict its class</b></p>
+        <div class="upload-form">
+          <form action = "/uploader" method = "POST" enctype = "multipart/form-data">
+            <input type = "file" name = "file" />
+            <input type = "submit"/>
+          </form>
+        </div>
+ </div>
+</center> 
+{% endblock %}
+```
 
 
 
